@@ -1,8 +1,7 @@
 name: testing
 
 # que solo corra cuando hay un pull request a main
-on:  
-  push:
+on:
   pull_request:
     branches:
       - main
