@@ -1,0 +1,33 @@
+name: testing
+
+# que solo corra cuando hay un pull request a main
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Check the source code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install packages
+        run: npm i
+      - name: Lint
+        run: npm run lint
+
+  test: # step para testear nuestra app react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "17.8"
+      - name: Installing Dependencies
+        run: npm i
+
+      - name: testing our app
+        run: npm test
