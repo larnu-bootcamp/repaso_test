@@ -25,7 +25,8 @@
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "indent": ["error", 2],
-        "complexity": ["error", 8]
+        "complexity": ["error", 8],
+        "semi": [2, "always"]
     },
     "settings": {
         "react": {
