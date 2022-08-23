@@ -8,7 +8,7 @@ describe('App', () => {
     render(<App />);
   });
 
-  test('Check that button add one the count', () => {
+  test('Check that button add two the count', () => {
     render(<App />);
     const button = screen.getByTestId('button');
     fireEvent.click(button);
