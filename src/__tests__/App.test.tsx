@@ -12,7 +12,7 @@ describe('App', () => {
     render(<App />);
     const button = screen.getByTestId('button');
     fireEvent.click(button);
-    expect(screen.getByTestId('button').textContent).toContain('1');
+    expect(screen.getByTestId('button').textContent).toContain('2');
   });
 });
 
