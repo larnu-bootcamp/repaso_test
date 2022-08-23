@@ -7,9 +7,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 # Allow one concurrent deployment
 concurrency:
@@ -32,38 +30,21 @@ jobs:
       - name: testing our app
         run: npm test
 
-  deploy:
+  
+  build-and-deploy:
     needs: [test]
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
-      
-      - name: Setup Node
-        uses: actions/setup-node@v1
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm i
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          node-version: "17.8"
-      
-      - name: Installing Dependencies
-        run: npm install
-      
-      - name: Building App
-        run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v1
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: './dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@main
+          folder: dist # The folder the action should deploy.
