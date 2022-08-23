@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 
 describe('App', () => {
 
-  test('Check that button add one the count', () => {
+  test('Render App', () => {
     render(<App />);
   });
 
